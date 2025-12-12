@@ -12,14 +12,17 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        
+        // Tambahkan baris ini di paling atas agar dia jalan duluan
+        $middleware->append(\App\Http\Middleware\ForceCors::class);
+
         $middleware->trustProxies(at: '*');
 
         $middleware->validateCsrfTokens(except: [
             '*',
         ]);
-
-        // [HAPUS ATAU KOMENTAR BARIS INI]
-        // $middleware->statefulApi(); 
+        
+        // $middleware->statefulApi(); // Pastikan ini tetap mati/komentar dulu
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
