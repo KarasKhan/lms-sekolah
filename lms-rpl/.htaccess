@@ -5,19 +5,6 @@
 
     RewriteEngine On
 
-    # --- TAMBAHAN KHUSUS CORS (SERVER LEVEL) ---
-    # Memaksa header CORS dikirim langsung oleh server
-    SetEnvIf Origin "^http(s)?://(.+\.)?(localhost:5173|lms-smkn6\.vercel\.app)$" CORS_ALLOW_ORIGIN=$0
-    Header always set Access-Control-Allow-Origin %{CORS_ALLOW_ORIGIN}e env=CORS_ALLOW_ORIGIN
-    Header always set Access-Control-Allow-Credentials "true"
-    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-    Header always set Access-Control-Allow-Headers "Origin, Content-Type, Accept, Authorization, X-Requested-With, Application, X-XSRF-TOKEN"
-
-    # Handle Preflight (OPTIONS) langsung return 200 OK
-    RewriteCond %{REQUEST_METHOD} OPTIONS
-    RewriteRule ^(.*)$ - [R=200,L]
-    # --- END TAMBAHAN ---
-
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

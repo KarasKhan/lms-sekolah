@@ -12,15 +12,16 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // 1. Percayai Proxy Railway (Wajib agar HTTPS terdeteksi)
+        
+        // 1. Percayai Proxy Railway (Agar HTTPS terbaca)
         $middleware->trustProxies(at: '*');
 
-        // 2. Matikan CSRF untuk API (Penting untuk Sanctum SPA)
+        // 2. Matikan CSRF untuk API
         $middleware->validateCsrfTokens(except: [
-            '*',
+            '*', 
         ]);
 
-        // 3. Aktifkan fitur API Stateful (Cookies)
+        // 3. Aktifkan Cookie/Session API
         $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {
