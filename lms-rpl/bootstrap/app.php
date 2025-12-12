@@ -13,8 +13,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         
-        // Tambahkan baris ini di paling atas agar dia jalan duluan
+        // --- TAMBAHKAN BARIS INI (PENTING) ---
+        // Ini mendaftarkan middleware ForceCors agar jalan paling duluan
         $middleware->append(\App\Http\Middleware\ForceCors::class);
+        // -------------------------------------
 
         $middleware->trustProxies(at: '*');
 
@@ -22,7 +24,8 @@ return Application::configure(basePath: dirname(__DIR__))
             '*',
         ]);
         
-        // $middleware->statefulApi(); // Pastikan ini tetap mati/komentar dulu
+        // Pastikan ini dimatikan dulu biar ga ribet session
+        // $middleware->statefulApi(); 
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
