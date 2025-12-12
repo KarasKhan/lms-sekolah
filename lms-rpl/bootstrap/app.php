@@ -12,12 +12,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // Tambahkan baris ini untuk memastikan CORS jalan dluan
+        // [PENTING] Percaya Proxy Railway agar cookies 'Secure' bisa terkirim lewat HTTPS
+        $middleware->trustProxies(at: '*');
+
+        // Matikan CSRF Token untuk semua route (Kita pakai Sanctum Auth sebagai pengaman)
         $middleware->validateCsrfTokens(except: [
-            '*', // Matikan CSRF untuk API biar tidak bentrok
+            '*',
         ]);
-        
-        // Pastikan Sanctum dan CORS ada
+
+        // Aktifkan fitur API Stateful (untuk login berbasis cookie/session)
         $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {
