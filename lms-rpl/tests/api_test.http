@@ -1,0 +1,48 @@
+@host = http://127.0.0.1:8000/api
+@contentType = application/json
+
+### ------------------------------------------------------------
+### 1. REGISTER SISWA
+### ------------------------------------------------------------
+# Note: Jika error 409 (Conflict), berarti NISN sudah terpakai.
+# Solusi: Jalankan "php artisan migrate:fresh --seed" di terminal.
+POST {{host}}/register
+Accept: application/json
+Content-Type: {{contentType}}
+
+{
+    "name": "Siswa Percobaan",
+    "email": "siswa@smkn6.sch.id",
+    "password": "password123",
+    "nisn": "13104410055"
+}
+
+### ------------------------------------------------------------
+### 2. LOGIN
+### ------------------------------------------------------------
+# Klik Send, lalu COPY "access_token" dari panel sebelah kanan
+POST {{host}}/login
+Accept: application/json
+Content-Type: {{contentType}}
+
+{
+    "email": "siswa@smkn6.sch.id",
+    "password": "password123"
+}
+
+### ------------------------------------------------------------
+### 3. GET USER PROFILE (MANUAL)
+GET {{host}}/user
+# Tempel Token hasil copy di bawah ini (setelah kata Bearer dan Spasi)
+Authorization: Bearer 15|vLUU9fq9KtDMw9MMG9Beey4HVaYhg2OaMpJgqgON5995f61c
+Accept: application/json
+Content-Type: {{contentType}}
+
+### ------------------------------------------------------------
+### 4. LOGOUT (MANUAL)
+### ------------------------------------------------------------
+# Gunakan token yang sama
+POST {{host}}/logout
+Authorization: Bearer 3|KgNUCQfo3AsLS4eomTxRhV3ja9RnQ0mrHraRlFc41ca599e6
+Accept: application/json
+Content-Type: {{contentType}}
