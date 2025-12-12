@@ -6,18 +6,17 @@ return [
     |--------------------------------------------------------------------------
     | Cross-Origin Resource Sharing (CORS) Configuration
     |--------------------------------------------------------------------------
-    |
     */
 
+    // Pastikan path api/* dan login/register tercover
     'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'logout', 'register'],
 
     'allowed_methods' => ['*'],
 
-    // Masukkan alamat Vercel Anda di sini
+    // --- BAGIAN PENTING: Masukkan URL Vercel Anda di sini ---
     'allowed_origins' => [
-        'http://localhost:5173',                // Untuk development di laptop
-        'https://lms-smkn6.vercel.app',         // URL Frontend Vercel Anda
-        'https://lms-sekolah.vercel.app',       // (Opsional) Jika ada variasi URL lain
+        'http://localhost:5173',                // Izin untuk Localhost (saat dev)
+        'https://lms-smkn6.vercel.app',         // Izin untuk Frontend Vercel (Production)
     ],
 
     'allowed_origins_patterns' => [],
@@ -28,7 +27,7 @@ return [
 
     'max_age' => 0,
 
-    // Ubah menjadi true agar token/cookies bisa lewat
-    'supports_credentials' => true, 
+    // Ubah ke true agar cookie/token autentikasi bisa lewat
+    'supports_credentials' => true,
 
 ];
