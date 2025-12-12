@@ -12,20 +12,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        
-        // --- TAMBAHKAN BARIS INI (PENTING) ---
-        // Ini mendaftarkan middleware ForceCors agar jalan paling duluan
-        $middleware->append(\App\Http\Middleware\ForceCors::class);
-        // -------------------------------------
-
+        // [WAJIB] Agar HTTPS dan Cookie Login terbaca
         $middleware->trustProxies(at: '*');
 
+        // Matikan CSRF untuk API
         $middleware->validateCsrfTokens(except: [
             '*',
         ]);
-        
-        // Pastikan ini dimatikan dulu biar ga ribet session
-        // $middleware->statefulApi(); 
+
+        $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
