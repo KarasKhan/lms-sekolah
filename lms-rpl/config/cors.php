@@ -1,25 +1,15 @@
 <?php
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Cross-Origin Resource Sharing (CORS) Configuration
-    |--------------------------------------------------------------------------
-    */
-
-    // Pastikan path api/* dan login/register tercover
     'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'logout', 'register'],
 
     'allowed_methods' => ['*'],
 
-    // --- BAGIAN PENTING: Masukkan URL Vercel Anda di sini ---
-    'allowed_origins' => [
-        'http://localhost:5173',                // Izin untuk Localhost (saat dev)
-        'https://lms-smkn6.vercel.app',         // Izin untuk Frontend Vercel (Production)
-    ],
+    // Kosongkan yang ini
+    'allowed_origins' => [],
 
-    'allowed_origins_patterns' => [],
+    // ISI YANG INI: Izinkan semua pola domain
+    'allowed_origins_patterns' => ['*'],
 
     'allowed_headers' => ['*'],
 
@@ -27,7 +17,5 @@ return [
 
     'max_age' => 0,
 
-    // Ubah ke true agar cookie/token autentikasi bisa lewat
     'supports_credentials' => true,
-
 ];
