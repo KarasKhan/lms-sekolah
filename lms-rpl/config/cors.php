@@ -2,21 +2,19 @@
 
 return [
     'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'logout', 'register'],
-
     'allowed_methods' => ['*'],
 
-    // Kosongkan yang spesifik
-    'allowed_origins' => [],
+    // HANYA Izinkan URL Vercel Anda (Tanpa slash di akhir)
+    'allowed_origins' => [
+        'http://localhost:5173',
+        'https://lms-smkn6.vercel.app', 
+    ],
 
-    // [JURUS PAMUNGKAS] Pakai Bintang (*) di Pattern
-    // Ini memaksa Laravel menerima request dari MANAPUN.
-    'allowed_origins_patterns' => ['*'],
-
+    'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
-
     'exposed_headers' => [],
-
     'max_age' => 0,
-
+    
+    // Wajib true
     'supports_credentials' => true,
 ];

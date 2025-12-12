@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // [WAJIB] Percayai Proxy Railway agar HTTPS terdeteksi
+        // [WAJIB] Percaya Proxy Railway
         $middleware->trustProxies(at: '*');
 
         // Matikan CSRF untuk API
