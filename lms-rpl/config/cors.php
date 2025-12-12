@@ -4,17 +4,14 @@ return [
     'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'logout', 'register'],
     'allowed_methods' => ['*'],
 
-    // HANYA Izinkan URL Vercel Anda (Tanpa slash di akhir)
-    'allowed_origins' => [
-        'http://localhost:5173',
-        'https://lms-smkn6.vercel.app', 
-    ],
+    // [UBAH INI] Pakai bintang biar Vercel manapun bisa masuk
+    'allowed_origins' => ['*'], 
 
     'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
     'exposed_headers' => [],
     'max_age' => 0,
-    
-    // Wajib true
-    'supports_credentials' => true,
+
+    // [UBAH INI] Matikan credentials biar browser gak protes soal keamanan cookie
+    'supports_credentials' => false, 
 ];
