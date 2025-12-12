@@ -205,4 +205,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/attendance/check-in', [StudentAttendanceController::class, 'submit']); // Input Token
     });
 
+    // Route Tes Koneksi (Tanpa Login, Tanpa DB)
+    Route::get('/cek', function () {
+        return response()->json([
+            'status' => 'ok',
+            'message' => 'Koneksi Railway Berhasil!',
+            'waktu' => now()->toDateTimeString()
+        ]);
+    });
+
 });
