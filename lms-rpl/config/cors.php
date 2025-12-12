@@ -2,20 +2,17 @@
 
 return [
     'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'logout', 'register'],
-
     'allowed_methods' => ['*'],
 
-    // Kosongkan yang ini
-    'allowed_origins' => [],
+    // WAJIB PERSIS: Tanpa garis miring di belakang
+    'allowed_origins' => [
+        'http://localhost:5173',
+        'https://lms-smkn6.vercel.app', 
+    ],
 
-    // ISI YANG INI: Izinkan semua pola domain
-    'allowed_origins_patterns' => ['*'],
-
+    'allowed_origins_patterns' => [],
     'allowed_headers' => ['*'],
-
     'exposed_headers' => [],
-
     'max_age' => 0,
-
-    'supports_credentials' => true,
+    'supports_credentials' => true, // Wajib true untuk login
 ];

@@ -12,15 +12,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // [PENTING] Percaya Proxy Railway agar cookies 'Secure' bisa terkirim lewat HTTPS
+        // 1. Percayai Proxy Railway (Wajib agar HTTPS terdeteksi)
         $middleware->trustProxies(at: '*');
 
-        // Matikan CSRF Token untuk semua route (Kita pakai Sanctum Auth sebagai pengaman)
+        // 2. Matikan CSRF untuk API (Penting untuk Sanctum SPA)
         $middleware->validateCsrfTokens(except: [
             '*',
         ]);
 
-        // Aktifkan fitur API Stateful (untuk login berbasis cookie/session)
+        // 3. Aktifkan fitur API Stateful (Cookies)
         $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {
