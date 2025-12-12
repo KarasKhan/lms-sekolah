@@ -3,16 +3,19 @@
 return [
     'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'logout', 'register'],
     'allowed_methods' => ['*'],
-    
-    // Pastikan URL ini PERSIS sama dengan URL browser saat buka Vercel
-    'allowed_origins' => [
-        'http://localhost:5173',
-        'https://lms-smkn6.vercel.app', 
-    ],
 
-    'allowed_origins_patterns' => [],
+    // [UBAH INI] Kosongkan yang spesifik
+    'allowed_origins' => [],
+
+    // [ISI INI] Gunakan Pola Bintang (*).
+    // Laravel akan otomatis mendeteksi domain pengirim dan mengizinkannya,
+    // Serta memperbolehkan Credentials/Login berjalan lancar.
+    'allowed_origins_patterns' => ['*'],
+
     'allowed_headers' => ['*'],
     'exposed_headers' => [],
     'max_age' => 0,
-    'supports_credentials' => true, // Wajib true
+    
+    // Wajib true untuk login
+    'supports_credentials' => true,
 ];
