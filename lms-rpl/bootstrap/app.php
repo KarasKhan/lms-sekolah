@@ -12,16 +12,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        
-        // 1. Percayai Proxy Railway (Agar HTTPS terbaca)
+        // [WAJIB] Percayai Proxy Railway agar HTTPS terdeteksi
         $middleware->trustProxies(at: '*');
 
-        // 2. Matikan CSRF untuk API
+        // Matikan CSRF untuk API
         $middleware->validateCsrfTokens(except: [
-            '*', 
+            '*',
         ]);
 
-        // 3. Aktifkan Cookie/Session API
         $middleware->statefulApi();
     })
     ->withExceptions(function (Exceptions $exceptions) {

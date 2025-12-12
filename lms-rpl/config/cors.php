@@ -3,8 +3,8 @@
 return [
     'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'logout', 'register'],
     'allowed_methods' => ['*'],
-
-    // Pastikan URL Vercel Anda benar (tanpa slash di akhir)
+    
+    // Pastikan URL ini PERSIS sama dengan URL browser saat buka Vercel
     'allowed_origins' => [
         'http://localhost:5173',
         'https://lms-smkn6.vercel.app', 

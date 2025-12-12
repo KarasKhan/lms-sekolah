@@ -1,22 +1,23 @@
 <?php
 
-// --- START: FRANKENPHP CORS FIX ---
-// Menangani CORS secara manual sebelum masuk ke Laravel
+// --- START: FRANKENPHP CORS FIX (JALUR KHUSUS) ---
+// Kita tangani header CORS secara manual agar tidak diblokir server
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
-// Daftar URL yang diizinkan (Tanpa garis miring di belakang)
+// Masukkan URL Vercel Anda di sini (Tanpa garis miring di akhir)
 $allowed_origins = [
     'http://localhost:5173',
     'https://lms-smkn6.vercel.app' 
 ];
 
+// 1. Jika Origin dikenali, kirim header izin
 if (in_array($origin, $allowed_origins)) {
     header("Access-Control-Allow-Origin: $origin");
     header("Access-Control-Allow-Credentials: true");
-    header("Access-Control-Max-Age: 86400");
+    header("Access-Control-Max-Age: 86400"); // Cache 24 jam
 }
 
-// Handle Preflight Request (OPTIONS) - Langsung Jawab OK
+// 2. Jika ini request Preflight (OPTIONS), langsung jawab OK dan stop.
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     if (in_array($origin, $allowed_origins)) {
         header("Access-Control-Allow-Origin: $origin");
@@ -25,9 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
         header("Access-Control-Allow-Credentials: true");
     }
     http_response_code(200);
-    exit(0); // Stop, jangan lanjut load Laravel
+    exit(0); // PENTING: Berhenti di sini agar tidak memuat Laravel
 }
-// --- END: CORS FIX ---
+// --- END: FRANKENPHP CORS FIX ---
 
 use Illuminate\Http\Request;
 
